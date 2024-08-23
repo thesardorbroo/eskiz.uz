@@ -11,7 +11,7 @@ public interface Authorizer {
 
     Optional<LoginResponseDto> login(LoginRequestDto dto);
 
-    Optional<LoginResponseDto> refresh(LoginRequestDto dto);
+    Optional<LoginResponseDto> refresh();
 
     Optional<UserInfoResponseDto> getCurrentUserInfo();
 
