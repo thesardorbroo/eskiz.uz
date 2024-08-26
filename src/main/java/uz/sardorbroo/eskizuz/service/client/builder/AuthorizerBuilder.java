@@ -3,6 +3,8 @@ package uz.sardorbroo.eskizuz.service.client.builder;
 import retrofit2.Retrofit;
 import uz.sardorbroo.eskizuz.service.Authorizer;
 import uz.sardorbroo.eskizuz.service.client.AuthorizerClient;
+import uz.sardorbroo.eskizuz.service.client.retrofit.RetrofitAuthorizerClient;
+import uz.sardorbroo.eskizuz.service.client.retrofit.RetrofitClient;
 import uz.sardorbroo.eskizuz.service.impl.AuthorizerImpl;
 
 import java.util.Objects;
@@ -15,7 +17,8 @@ public class AuthorizerBuilder {
 
     public AuthorizerBuilder client(Retrofit retrofit) {
         Objects.requireNonNull(retrofit, "Invalid argument is passed! Retrofit must not be null!");
-        this.client = retrofit.create(AuthorizerClient.class);
+        RetrofitClient client = retrofit.create(RetrofitClient.class);
+        this.client = new RetrofitAuthorizerClient(client);
         return this;
     }
 
