@@ -14,6 +14,8 @@ public class AuthorizerClientTest {
     @Test
     public void testGetToken() {
 
+        // todo add interceptor and test it
+
         var retrofit = new Retrofit.Builder()
                 .baseUrl(EskizClientConstants.BASE_URL)
                 .addConverterFactory(JacksonConverterFactory.create())
