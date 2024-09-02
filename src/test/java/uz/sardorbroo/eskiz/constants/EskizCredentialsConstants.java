@@ -2,8 +2,7 @@ package uz.sardorbroo.eskiz.constants;
 
 public class EskizCredentialsConstants {
 
-    public static final String ESKIZ_LOGIN = "ESKIZ_UZ_EMAIL";
-    public static final String ESKIZ_PASSWORD = "ESKIZ_UZ_PASSWORD";
+    public static final String ESKIZ_LOGIN = "malikovzafar406@gmail.com";
+    public static final String ESKIZ_PASSWORD = "1hspJuL2FGXh42TXY5oEgfxIPAOemFkZFubujGnV";
 
-    public static final String ESKIZ_BASE_URL = "";
 }

@@ -34,9 +34,5 @@ public class AuthorizerClientTest {
                 .build();
 
         var retrofitAuthorizerClient = new RetrofitAuthorizerClient(client);
-
-
-        var responseOptional = retrofitAuthorizerClient.getToken(dto);
-        System.out.println(responseOptional);
     }
 }
