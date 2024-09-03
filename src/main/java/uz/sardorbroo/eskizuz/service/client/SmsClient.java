@@ -1,4 +1,4 @@
-package uz.sardorbroo.eskizuz.service;
+package uz.sardorbroo.eskizuz.service.client;
 
 import uz.sardorbroo.eskizuz.dto.sms.*;
 import uz.sardorbroo.eskizuz.dto.sms.enumeration.SmsDetailStatus;
@@ -6,7 +6,7 @@ import uz.sardorbroo.eskizuz.dto.sms.enumeration.SmsDetailStatus;
 import java.util.Collection;
 import java.util.Optional;
 
-public interface Sms {
+public interface SmsClient {
 
     Optional<SendSmsResponseDto> send(SendSmsRequestDto dto);
 
@@ -21,4 +21,5 @@ public interface Sms {
     Optional<SmsDispatchStatusResponseDto> getDispatchStatus(SmsDispatchStatusRequestDto dto);
 
     Collection<String> getNicks();
+
 }

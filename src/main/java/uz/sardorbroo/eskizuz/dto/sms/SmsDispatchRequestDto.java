@@ -8,12 +8,14 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class SmsDetailsResponseDto {
+public class SmsDispatchRequestDto {
 
-    @JsonProperty("data")
-    private SmsDetailsRootDto data;
+    @JsonProperty("dispatch_id")
+    private Long dispatchId;
 
-    @JsonProperty("status")
-    private String status;
+    @JsonProperty("count")
+    private Integer count;
 
+    @JsonProperty("is_ad")
+    private Integer isAd;
 }

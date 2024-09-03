@@ -1,19 +1,20 @@
 package uz.sardorbroo.eskizuz.dto.sms;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class SmsDetailsResponseDto {
+public class SmsDispatchStatusResponseDto {
 
-    @JsonProperty("data")
-    private SmsDetailsRootDto data;
-
-    @JsonProperty("status")
     private String status;
+
+    private String id;
+
+    private List<SmsDispatchResultDto> data;
 
 }

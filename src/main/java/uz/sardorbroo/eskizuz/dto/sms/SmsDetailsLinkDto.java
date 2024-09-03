@@ -5,15 +5,19 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.net.URL;
+
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class SmsDetailsResponseDto {
+public class SmsDetailsLinkDto {
 
-    @JsonProperty("data")
-    private SmsDetailsRootDto data;
+    @JsonProperty("url")
+    private URL url;
 
-    @JsonProperty("status")
-    private String status;
+    @JsonProperty("label")
+    private String label;
 
+    @JsonProperty("active")
+    private boolean active;
 }
