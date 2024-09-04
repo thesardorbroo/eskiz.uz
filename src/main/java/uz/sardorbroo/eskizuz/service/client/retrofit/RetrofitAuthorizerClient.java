@@ -44,7 +44,8 @@ public class RetrofitAuthorizerClient implements AuthorizerClient {
     public Optional<LoginResponseDto> refreshToken() {
         log.debug("Refresh token with retrofit client");
 
-        Call<LoginResponseDto> refreshTokenRequest = client.refreshToken();
+        // todo get token from JWT storage or interceptor makes automatically
+        Call<LoginResponseDto> refreshTokenRequest = client.refreshToken("" /* todo set token */);
         try {
 
             Response<LoginResponseDto> response = refreshTokenRequest.execute();
@@ -64,7 +65,8 @@ public class RetrofitAuthorizerClient implements AuthorizerClient {
     public Optional<UserInfoResponseDto> getUserInfo() {
         log.debug("Get user info with retrofit client");
 
-        Call<UserInfoResponseDto> userInfoRequest = client.getUserInfo();
+        // todo get token from JWT storage or interceptor makes automatically
+        Call<UserInfoResponseDto> userInfoRequest = client.getUserInfo("" /* todo set token */);
         try {
 
             Response<UserInfoResponseDto> response = userInfoRequest.execute();

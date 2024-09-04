@@ -25,6 +25,7 @@ public class RetrofitTokenInterceptor implements Interceptor {
     private final LoginRequestDto credentials;
 
     @Override
+    // todo add JWT storage
     // todo should refresh token if token not expired
     public Response intercept(Chain chain) throws IOException {
         log.debug("Retrofit token interceptor works");

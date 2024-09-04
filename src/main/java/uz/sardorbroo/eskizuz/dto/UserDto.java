@@ -1,15 +1,19 @@
 package uz.sardorbroo.eskizuz.dto;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
 
+import java.time.Instant;
+
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Accessors(chain = true)
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class UserDto {
 
     @JsonProperty("id")
@@ -20,9 +24,6 @@ public class UserDto {
 
     @JsonProperty("email")
     private String email;
-
-    @JsonProperty("password")
-    private String password;
 
     @JsonProperty("role")
     private String role;
@@ -35,5 +36,9 @@ public class UserDto {
 
     @JsonProperty("balance")
     private Double balance;
+
+    // todo use Instant instead of String
+    @JsonProperty("created_at")
+    private String createdAt;
 
 }
