@@ -5,7 +5,7 @@ import org.junit.jupiter.api.Test;
 import uz.sardorbroo.eskiz.utils.RetrofitClientUtils;
 import uz.sardorbroo.eskizuz.service.client.retrofit.TemplateRetrofitClient;
 
-public class TemplateRetrofitTClientTest {
+public class TemplateRetrofitClientTest {
 
     private TemplateRetrofitClient client;
 

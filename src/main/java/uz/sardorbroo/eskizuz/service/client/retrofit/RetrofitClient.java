@@ -17,4 +17,7 @@ public interface RetrofitClient {
     @GET("/api/auth/user")
     Call<UserInfoResponseDto> getUserInfo(@Header("Authorization") String token);
 
+    @GET("/api/auth/user")
+    Call<UserInfoResponseDto> getUserInfo();
+
 }
