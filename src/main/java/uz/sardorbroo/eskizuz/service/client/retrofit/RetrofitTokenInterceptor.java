@@ -9,6 +9,7 @@ import org.apache.commons.lang3.StringUtils;
 import retrofit2.Call;
 import uz.sardorbroo.eskizuz.dto.authorization.LoginRequestDto;
 import uz.sardorbroo.eskizuz.dto.authorization.LoginResponseDto;
+import uz.sardorbroo.eskizuz.dto.authorization.TokenDto;
 
 import java.io.IOException;
 import java.util.Objects;
@@ -24,25 +25,31 @@ public class RetrofitTokenInterceptor implements Interceptor {
 
     private final LoginRequestDto credentials;
 
+    private TokenDto token;
+
     @Override
     // todo add JWT storage
     // todo should refresh token if token not expired
     public Response intercept(Chain chain) throws IOException {
         log.debug("Retrofit token interceptor works");
 
-        Call<LoginResponseDto> loginResponse = client.getToken(credentials);
+        if (Objects.isNull(token)) {
+            Call<LoginResponseDto> loginResponse = client.getToken(credentials);
+            retrofit2.Response<LoginResponseDto> response = loginResponse.execute();
 
-        retrofit2.Response<LoginResponseDto> response = loginResponse.execute();
-        if (
-                Objects.isNull(response.body())
-                || Objects.isNull(response.body().getData())
-                || StringUtils.isBlank(response.body().getData().getToken())
-        ) {
-            log.warn("Token are not fetched successfully! Response: {}", response);
-            throw new RuntimeException("Token are not fetched successfully");
+            if (Objects.isNull(response.body())
+                            || Objects.isNull(response.body().getData())
+                            || StringUtils.isBlank(response.body().getData().getToken())
+            ) {
+                log.warn("Token are not fetched successfully! Response: {}", response);
+                throw new RuntimeException("Token are not fetched successfully");
+            }
+
+            this.token = response.body().getData();
+        } else {
+            // send request to refresh token
         }
 
-        String token = response.body().getData().getToken();
 
         Request request = chain.request()
                 .newBuilder()
