@@ -1,10 +1,8 @@
-package uz.sardorbroo.eskiz.utils;
+package uz.sardorbroo.eskizuz.utils;
 
 import okhttp3.OkHttpClient;
 import retrofit2.Retrofit;
 import retrofit2.converter.jackson.JacksonConverterFactory;
-import uz.sardorbroo.eskiz.factory.EskizPropertiesFactory;
-import uz.sardorbroo.eskiz.factory.RealEskizPropertiesFactory;
 import uz.sardorbroo.eskizuz.constants.EskizClientConstants;
 import uz.sardorbroo.eskizuz.dto.authorization.LoginRequestDto;
 import uz.sardorbroo.eskizuz.properties.EskizProperties;
@@ -12,11 +10,7 @@ import uz.sardorbroo.eskizuz.service.client.retrofit.RetrofitClient;
 import uz.sardorbroo.eskizuz.service.client.retrofit.RetrofitTokenInterceptor;
 import uz.sardorbroo.eskizuz.service.client.retrofit.TemplateRetrofitClient;
 
-// todo use /src/main/java/uz/sardorbroo/eskizuz/utils/RetrofitClientUtils and remove duplicated functions
 public class RetrofitClientUtils {
-
-    private static final EskizPropertiesFactory FACTORY = new RealEskizPropertiesFactory();
-    private static final EskizProperties PROPERTIES = FACTORY.getProperties();
 
     public static <T> T getClient(Class<T> clazz, OkHttpClient ok) {
 
@@ -51,10 +45,6 @@ public class RetrofitClientUtils {
         return new RetrofitTokenInterceptor(tokenClient, credentials);
     }
 
-    public static RetrofitTokenInterceptor getTokenInterceptor() {
-        return getTokenInterceptor(PROPERTIES);
-    }
-
     public static TemplateRetrofitClient getTemplateClient(EskizProperties properties) {
 
         var interceptor = getTokenInterceptor(properties);
@@ -64,10 +54,6 @@ public class RetrofitClientUtils {
                 .build();
 
         return getClient(TemplateRetrofitClient.class, ok);
-    }
-
-    public static TemplateRetrofitClient getTemplateClient() {
-        return getTemplateClient(PROPERTIES);
     }
 
     public static LoginRequestDto buildCredentials(EskizProperties properties) {

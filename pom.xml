@@ -15,6 +15,7 @@
         <lombok.version>1.18.24</lombok.version>
         <retrofit.version>2.9.0</retrofit.version>
         <slf4j-api.version>1.7.26</slf4j-api.version>
+        <slf4j-simple.version>1.7.26</slf4j-simple.version>
         <junit-jupiter.version>5.10.2</junit-jupiter.version>
         <retrofit-jackson-converter.version>2.9.0</retrofit-jackson-converter.version>
         <spring-boot-starter-test.version>3.3.0</spring-boot-starter-test.version>
@@ -58,6 +59,11 @@
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-api</artifactId>
             <version>${slf4j-api.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-simple</artifactId>
+            <version>${slf4j-simple.version}</version>
         </dependency>
         <dependency>
             <groupId>org.apache.commons</groupId>

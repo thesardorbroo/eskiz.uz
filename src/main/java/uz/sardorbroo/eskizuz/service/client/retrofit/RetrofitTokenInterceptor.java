@@ -23,7 +23,7 @@ import java.util.Objects;
 public class RetrofitTokenInterceptor implements Interceptor {
 
     private static final String AUTHORIZATION_HEADER_NAME = "Authorization";
-    private static final String AUTHORIZATION_HEADER_VALUE_PREFIX = "Bearer ";
+    private static final String AUTHORIZATION_HEADER_VALUE_PREFIX = "Bearer";
 
     // used for getting token
     private final RetrofitClient client;
@@ -49,12 +49,12 @@ public class RetrofitTokenInterceptor implements Interceptor {
                 throw new RuntimeException("Token are not fetched successfully");
             }
 
-            this.token = response.body().getData();
+            this.setToken(response.body().getData());
             log.debug("Token has fetched successfully");
         } else {
             log.debug("Refresh expired token");
 
-            Call<LoginResponseDto> call = client.refreshToken(token.getToken());
+            Call<LoginResponseDto> call = client.refreshToken(buildAuthorizationHeader());
             retrofit2.Response<LoginResponseDto> response = call.execute();
 
             if (!hasTokenInResponse(response)) {
@@ -62,13 +62,13 @@ public class RetrofitTokenInterceptor implements Interceptor {
                 throw new RuntimeException("Token are not fetched successfully");
             }
 
-            this.token = response.body().getData();
+            this.setToken(response.body().getData());
             log.debug("Token has refreshed successfully");
         }
 
         Request request = chain.request()
                 .newBuilder()
-                .header(AUTHORIZATION_HEADER_NAME, AUTHORIZATION_HEADER_VALUE_PREFIX + token.getToken())
+                .header(AUTHORIZATION_HEADER_NAME, buildAuthorizationHeader())
                 .build();
 
         log.debug("Access token has added successfully to current request");
@@ -96,5 +96,9 @@ public class RetrofitTokenInterceptor implements Interceptor {
         }
 
         return true;
+    }
+
+    private String buildAuthorizationHeader() {
+        return String.join(" ", AUTHORIZATION_HEADER_VALUE_PREFIX, this.token.getToken());
     }
 }

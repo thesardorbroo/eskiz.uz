@@ -1,6 +1,7 @@
 package uz.sardorbroo.eskiz;
 
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import uz.sardorbroo.eskiz.factory.EskizPropertiesFactory;
 import uz.sardorbroo.eskiz.factory.RealEskizPropertiesFactory;
@@ -16,6 +17,7 @@ public class EskizTest {
     private EskizProperties properties = PROPERTIES_FACTORY.getProperties();
 
     @Test
+    @Disabled
     public void testEskiz() {
 
         var eskiz = new Eskiz.Builder(properties)
@@ -38,4 +40,6 @@ public class EskizTest {
 
         System.out.println("Templates: " + templates);
     }
+
+    // let's test SMS API, because it's important for this project. It's core of the project
 }

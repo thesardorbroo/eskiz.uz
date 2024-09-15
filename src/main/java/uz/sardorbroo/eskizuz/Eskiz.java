@@ -8,12 +8,15 @@ import uz.sardorbroo.eskizuz.constants.EskizClientConstants;
 import uz.sardorbroo.eskizuz.dto.authorization.LoginRequestDto;
 import uz.sardorbroo.eskizuz.properties.EskizProperties;
 import uz.sardorbroo.eskizuz.service.Authorizer;
+import uz.sardorbroo.eskizuz.service.Sms;
 import uz.sardorbroo.eskizuz.service.Template;
 import uz.sardorbroo.eskizuz.service.client.AuthorizerClient;
+import uz.sardorbroo.eskizuz.service.client.SmsClient;
 import uz.sardorbroo.eskizuz.service.client.TemplateClient;
 import uz.sardorbroo.eskizuz.service.client.retrofit.*;
 import uz.sardorbroo.eskizuz.service.impl.AuthorizerImpl;
 import uz.sardorbroo.eskizuz.service.impl.TemplateImpl;
+import uz.sardorbroo.eskizuz.utils.RetrofitClientUtils;
 
 public class Eskiz {
 
@@ -21,9 +24,12 @@ public class Eskiz {
 
     private Template template;
 
-    public Eskiz(Authorizer authorizer, Template template) {
+    private Sms sms;
+
+    public Eskiz(Authorizer authorizer, Template template, Sms sms) {
         this.authorizer = authorizer;
         this.template = template;
+        this.sms = sms;
     }
 
     public Authorizer authorizer() {
@@ -32,6 +38,10 @@ public class Eskiz {
 
     public Template template() {
         return this.template;
+    }
+
+    public Sms sms() {
+        return this.sms;
     }
 
     public static class Builder {
@@ -44,16 +54,20 @@ public class Eskiz {
         private Template template;
         private TemplateClient templateClient;
 
+        private Sms sms;
+        private SmsClient smsClient;
+
         public Builder(EskizProperties properties) {
             this.properties = properties;
             this.authorizerClient = new RetrofitAuthorizerClient(initRetrofitClient());
             this.authorizer = new AuthorizerImpl(authorizerClient);
             this.templateClient = new RetrofitTemplateClient(initTemplateRetrofitClient(properties));
             this.template = new TemplateImpl(templateClient);
+            this.smsClient = new RetrofitSmsClient(null); // todo
         }
 
         public Eskiz build() {
-            return new Eskiz(authorizer, template);
+            return new Eskiz(authorizer, template, sms);
         }
 
         public Eskiz.Builder authorizer(Authorizer authorizer) {
@@ -85,6 +99,13 @@ public class Eskiz {
                     .build();
 
             return retrofit.create(TemplateRetrofitClient.class);
+        }
+
+        private SmsRetrofitClient initSmsRetrofitClient(EskizProperties properties) {
+
+            RetrofitTokenInterceptor interceptor = RetrofitClientUtils.getTokenInterceptor(properties);
+            // todo init sms retrofit client
+            return null;
         }
 
         private RetrofitClient initRetrofitClient() {
