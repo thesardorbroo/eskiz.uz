@@ -59,7 +59,7 @@ public class SmsRetrofitClientTest {
 
     @ParameterizedTest
     @NullSource
-    @ValueSource(strings = {"", "         ", "123", "111111111111", "11111999124625" })
+    @ValueSource(strings = {"", "         ", "123", "111111111111", "11111999124625", "+998999124625" })
     public void testSendSmsWithInvalidPhoneNumber(String phoneNumber) throws IOException {
         log.debug("Send sms message with invalid phone number! Phone number: {}", phoneNumber);
 

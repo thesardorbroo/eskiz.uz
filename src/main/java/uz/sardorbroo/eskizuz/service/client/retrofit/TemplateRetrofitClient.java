@@ -11,7 +11,7 @@ public interface TemplateRetrofitClient {
     @POST("/api/users/template")
     Call<TemplateDto> createTemplate();
 
-    @GET("/api/users/template")
+    @GET("/api/template/")
     Call<TemplateResponseDto> getAllTemplates();
 
 }

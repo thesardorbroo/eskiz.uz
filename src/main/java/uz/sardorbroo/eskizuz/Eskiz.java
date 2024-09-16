@@ -86,6 +86,11 @@ public class Eskiz {
             return this;
         }
 
+        public Eskiz.Builder sms(Sms sms) {
+            this.sms = sms;
+            return this;
+        }
+
         private RetrofitTokenInterceptor initRetrofitTokenInterceptor() {
             return RetrofitClientUtils.getTokenInterceptor(properties);
         }
