@@ -31,7 +31,6 @@
 Follow these steps for installing package:
 
 1. **Override `settings.xml`, add credentials for reading package**
-   Set `thesardorbroo` to `username` tag, and `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` to `password` tag
    ```xml
        <servers>
         <server>
@@ -53,8 +52,9 @@ Follow these steps for installing package:
    > If you want to add something add connect to owner([thesardorbroo](https://t.me/Sardorbro11))
    
    > [!IMPORTANT]
-   > If you don't want to edit global `settings.xml`, use our already configured `settings.xml`. 
-   > You just need copy/paste and change your **Intellij Idea** maven user settings. See [guide](https://link-to-guide-which-is-teaches-how-to-change-maven-settings.xml)
+   > - Get public credentials from [settings.xml](/settings.xml)
+   > - If you don't want to edit global `settings.xml`, use our already configured `settings.xml`.
+     You just need copy/paste and change your **Intellij Idea** maven user settings. See [guide](https://link-to-guide-which-is-teaches-how-to-change-maven-settings.xml)
  
 2. **Add repository tag to your `pom.xml`:**
    ```xml
