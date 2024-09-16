@@ -31,16 +31,17 @@
 Follow these steps for installing package:
 
 1. **Override `settings.xml`, add credentials for reading package**
+   Set `thesardorbroo` to `username` tag, and `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` to `password` tag
    ```xml
        <servers>
         <server>
             <id>github-sardorbroo-eskizuz</id>
-            <username>thesardorbroo</username>
-            <password>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</password>
+            <username>${ username }</username>
+            <password>${ password or token }</password>
             <configuration>
                 <authenticationInfo>
-                    <userName>thesardorbroo</userName>
-                    <password>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</password>
+                    <userName>${ username }</userName>
+                    <password>${ password or token }</password>
                 </authenticationInfo>
             </configuration>
         </server>
