@@ -33,27 +33,20 @@ public class RetrofitClientUtils {
         return retrofit.create(clazz);
     }
 
-    public static RetrofitClient getTokenClient() {
-        return getClient(RetrofitClient.class);
-    }
-
     public static RetrofitTokenInterceptor getTokenInterceptor(EskizProperties properties) {
 
         var credentials = buildCredentials(properties);
-        var tokenClient = getTokenClient();
+        var tokenClient = getClient(RetrofitClient.class);
 
         return new RetrofitTokenInterceptor(tokenClient, credentials);
     }
 
-    public static TemplateRetrofitClient getTemplateClient(EskizProperties properties) {
-
+    public static OkHttpClient buildOkHttpClientWithInterceptor(EskizProperties properties) {
         var interceptor = getTokenInterceptor(properties);
 
-        var ok = new OkHttpClient.Builder()
+        return new OkHttpClient.Builder()
                 .addInterceptor(interceptor)
                 .build();
-
-        return getClient(TemplateRetrofitClient.class, ok);
     }
 
     public static LoginRequestDto buildCredentials(EskizProperties properties) {

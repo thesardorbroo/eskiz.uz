@@ -10,10 +10,10 @@ import org.junit.jupiter.params.provider.NullSource;
 import org.junit.jupiter.params.provider.ValueSource;
 import uz.sardorbroo.eskiz.factory.EskizPropertiesFactory;
 import uz.sardorbroo.eskiz.factory.RealEskizPropertiesFactory;
-import uz.sardorbroo.eskiz.utils.RetrofitClientUtils;
 import uz.sardorbroo.eskizuz.dto.authorization.LoginRequestDto;
 import uz.sardorbroo.eskizuz.properties.EskizProperties;
 import uz.sardorbroo.eskizuz.service.client.retrofit.RetrofitClient;
+import uz.sardorbroo.eskizuz.utils.RetrofitClientUtils;
 
 import java.io.IOException;
 
@@ -30,7 +30,7 @@ public class TokenRetrofitClientTest {
     @BeforeEach
     public void init() {
 
-        this.client = RetrofitClientUtils.getTokenClient();
+        this.client = RetrofitClientUtils.getClient(RetrofitClient.class);
 
     }
 

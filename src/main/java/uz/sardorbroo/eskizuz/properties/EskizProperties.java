@@ -15,4 +15,7 @@ public class EskizProperties {
     // todo mask
     private String password;
 
+    // todo mask
+    private Long from;
+
 }

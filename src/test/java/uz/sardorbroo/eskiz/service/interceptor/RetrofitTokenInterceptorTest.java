@@ -3,18 +3,14 @@ package uz.sardorbroo.eskiz.service.interceptor;
 import lombok.extern.slf4j.Slf4j;
 import okhttp3.OkHttpClient;
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.Timeout;
-import retrofit2.Call;
 import uz.sardorbroo.eskiz.factory.EskizPropertiesFactory;
 import uz.sardorbroo.eskiz.factory.RealEskizPropertiesFactory;
-import uz.sardorbroo.eskiz.utils.RetrofitClientUtils;
-import uz.sardorbroo.eskizuz.dto.UserInfoResponseDto;
 import uz.sardorbroo.eskizuz.dto.authorization.TokenDto;
 import uz.sardorbroo.eskizuz.properties.EskizProperties;
 import uz.sardorbroo.eskizuz.service.client.retrofit.RetrofitClient;
-import uz.sardorbroo.eskizuz.service.client.retrofit.RetrofitTokenInterceptor;
+import uz.sardorbroo.eskizuz.utils.RetrofitClientUtils;
 
 import java.io.IOException;
 import java.util.concurrent.TimeUnit;
@@ -29,7 +25,7 @@ public class RetrofitTokenInterceptorTest {
     public void testGetUserInfoWithoutAuthorizingManually() throws IOException {
         log.info("Get userinfo without authorizing manually");
 
-        var interceptor = RetrofitClientUtils.getTokenInterceptor(PROPERTIES);
+        var interceptor = uz.sardorbroo.eskizuz.utils.RetrofitClientUtils.getTokenInterceptor(PROPERTIES);
 
         var ok = new OkHttpClient.Builder()
                 .addInterceptor(interceptor)
@@ -85,7 +81,7 @@ public class RetrofitTokenInterceptorTest {
     private TokenDto getRealToken() throws IOException {
 
         var credentials = RetrofitClientUtils.buildCredentials(PROPERTIES);
-        var tokenClient = RetrofitClientUtils.getTokenClient();
+        var tokenClient = RetrofitClientUtils.getClient(RetrofitClient.class);
         var call = tokenClient.getToken(credentials);
         var response = call.execute();
 

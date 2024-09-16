@@ -1,11 +1,9 @@
 package uz.sardorbroo.eskizuz;
 
-import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
 import retrofit2.Retrofit;
 import retrofit2.converter.jackson.JacksonConverterFactory;
 import uz.sardorbroo.eskizuz.constants.EskizClientConstants;
-import uz.sardorbroo.eskizuz.dto.authorization.LoginRequestDto;
 import uz.sardorbroo.eskizuz.properties.EskizProperties;
 import uz.sardorbroo.eskizuz.service.Authorizer;
 import uz.sardorbroo.eskizuz.service.Sms;
@@ -15,6 +13,7 @@ import uz.sardorbroo.eskizuz.service.client.SmsClient;
 import uz.sardorbroo.eskizuz.service.client.TemplateClient;
 import uz.sardorbroo.eskizuz.service.client.retrofit.*;
 import uz.sardorbroo.eskizuz.service.impl.AuthorizerImpl;
+import uz.sardorbroo.eskizuz.service.impl.SmsImpl;
 import uz.sardorbroo.eskizuz.service.impl.TemplateImpl;
 import uz.sardorbroo.eskizuz.utils.RetrofitClientUtils;
 
@@ -48,6 +47,8 @@ public class Eskiz {
         private static final String ESKIZ_BASE_URL = EskizClientConstants.BASE_URL;
         private final EskizProperties properties;
 
+        private RetrofitTokenInterceptor interceptor;
+
         private Authorizer authorizer;
         private AuthorizerClient authorizerClient;
 
@@ -59,11 +60,16 @@ public class Eskiz {
 
         public Builder(EskizProperties properties) {
             this.properties = properties;
-            this.authorizerClient = new RetrofitAuthorizerClient(initRetrofitClient());
+            this.interceptor = initRetrofitTokenInterceptor();
+
+            this.authorizerClient = initAuthorizerClient();
             this.authorizer = new AuthorizerImpl(authorizerClient);
-            this.templateClient = new RetrofitTemplateClient(initTemplateRetrofitClient(properties));
+
+            this.templateClient = initTemplateClient();
             this.template = new TemplateImpl(templateClient);
-            this.smsClient = new RetrofitSmsClient(null); // todo
+
+            this.smsClient = initSmsClient();
+            this.sms = new SmsImpl(smsClient);
         }
 
         public Eskiz build() {
@@ -80,32 +86,36 @@ public class Eskiz {
             return this;
         }
 
-        private TemplateRetrofitClient initTemplateRetrofitClient(EskizProperties properties) {
-
-            LoginRequestDto credentials = new LoginRequestDto();
-            credentials.setEmail(properties.getEmail());
-            credentials.setPassword(properties.getPassword());
-
-            Interceptor tokenInterceptor = new RetrofitTokenInterceptor(initRetrofitClient(), credentials);
-
-            OkHttpClient okClient = new OkHttpClient.Builder()
-                    .addInterceptor(tokenInterceptor)
-                    .build();
-
-            Retrofit retrofit = new Retrofit.Builder()
-                    .addConverterFactory(JacksonConverterFactory.create())
-                    .client(okClient)
-                    .baseUrl(ESKIZ_BASE_URL)
-                    .build();
-
-            return retrofit.create(TemplateRetrofitClient.class);
+        private RetrofitTokenInterceptor initRetrofitTokenInterceptor() {
+            return RetrofitClientUtils.getTokenInterceptor(properties);
         }
 
-        private SmsRetrofitClient initSmsRetrofitClient(EskizProperties properties) {
+        private AuthorizerClient initAuthorizerClient() {
+            return new RetrofitAuthorizerClient(initRetrofitClient());
+        }
 
-            RetrofitTokenInterceptor interceptor = RetrofitClientUtils.getTokenInterceptor(properties);
-            // todo init sms retrofit client
-            return null;
+        private TemplateClient initTemplateClient() {
+            return new RetrofitTemplateClient(initTemplateRetrofitClient());
+        }
+
+        private TemplateRetrofitClient initTemplateRetrofitClient() {
+            OkHttpClient ok = getBaseOkHttpClient();
+            return RetrofitClientUtils.getClient(TemplateRetrofitClient.class, ok);
+        }
+
+        private SmsRetrofitClient initSmsRetrofitClient() {
+            OkHttpClient ok = getBaseOkHttpClient();
+            return RetrofitClientUtils.getClient(SmsRetrofitClient.class, ok);
+        }
+
+        private SmsClient initSmsClient() {
+            return new RetrofitSmsClient(initSmsRetrofitClient());
+        }
+
+        private OkHttpClient getBaseOkHttpClient() {
+            return new OkHttpClient.Builder()
+                    .addInterceptor(this.interceptor)
+                    .build();
         }
 
         private RetrofitClient initRetrofitClient() {

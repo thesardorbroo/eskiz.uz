@@ -25,6 +25,6 @@ public class SendBatchSmsRequestDto {
     private URL callbackUrl;
 
     @JsonProperty("messages")
-    private List<SendBatchSmsMessageResponseDto> messages;
+    private List<SendBatchSmsMessageRequestDto> messages;
 
 }

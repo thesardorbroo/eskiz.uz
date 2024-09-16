@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @JsonIgnoreProperties
-public class SendBatchSmsMessageResponseDto {
+public class SendBatchSmsMessageRequestDto {
 
     @JsonProperty("user_sms_id")
     private String id;

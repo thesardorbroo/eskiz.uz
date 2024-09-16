@@ -14,18 +14,18 @@ public class EskizTest {
     // private static final EskizPropertiesFactory PROPERTIES_FACTORY = new FakeEskizPropertiesFactory();
     private static final EskizPropertiesFactory PROPERTIES_FACTORY = new RealEskizPropertiesFactory();
 
-    private EskizProperties properties = PROPERTIES_FACTORY.getProperties();
+    private static final EskizProperties PROPERTIES = PROPERTIES_FACTORY.getProperties();
 
     @Test
     @Disabled
     public void testEskiz() {
 
-        var eskiz = new Eskiz.Builder(properties)
+        var eskiz = new Eskiz.Builder(PROPERTIES)
                 .build();
 
         var credentials = new LoginRequestDto();
-        credentials.setEmail(properties.getEmail());
-        credentials.setPassword(properties.getPassword());
+        credentials.setEmail(PROPERTIES.getEmail());
+        credentials.setPassword(PROPERTIES.getPassword());
 
         var response = eskiz.authorizer().login(credentials);
         Assertions.assertNotNull(response);
