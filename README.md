@@ -1,20 +1,5 @@
 # [Eskiz.uz](https://eskiz.uz/sms) SMS Java SDK
 
-## Developers
-| Name | Nick name  | Stack | Contact                               |
-|:-----|:-----------|:------|:--------------------------------------|
-|Sardor Shorahimov| Sardorbroo | Java backend| [Telegram](https://t.me/Sardorbro11/) |
-
-## Should do
-
-- [x] Implement `Authorizer` builder
-- [x] Add `Retrofit` interceptor
-- [ ] Publish the package to GitHub package registry
-- [ ] Write documentation
-- [ ] Complete send SMS tests
-- [ ] Write tests
-- [ ] `@Slf4j` doesn't work while working junit tests
-
 ## Documentation
  - **Quick start**
    - [Installation package](#installation-package)
@@ -25,6 +10,10 @@
    - Add examples 
  - **Publish package**
    - Add instruction about how to publish new package
+ - **Developers**
+   - [Contacts](#developers)
+ - **Todo**
+   - [Todo](#should-do)
 
 ### Installation package
 
@@ -46,11 +35,10 @@ Follow these steps for installing package:
         </server>
     </servers>
    ```
-   > [!NOTE]
-   > 
+   > [!NOTE]  
    > Token for only read package, you cannot publish something new with this token. 
    > If you want to add something add connect to owner([thesardorbroo](https://t.me/Sardorbro11))
-   
+
    > [!IMPORTANT]
    > - Get public credentials from [settings.xml](/settings.xml)
    > - If you don't want to edit global `settings.xml`, use our already configured `settings.xml`.
@@ -120,6 +108,19 @@ public static void main(String[] args) {
 }
 ```
 
-
-
 ### Publish package
+
+## Developers
+| Name | Nick name  | Stack | Contact                               |
+|:-----|:-----------|:------|:--------------------------------------|
+|Sardor Shorahimov| Sardorbroo | Java backend| [Telegram](https://t.me/Sardorbro11/) |
+
+## Should do
+
+- [x] Implement `Authorizer` builder
+- [x] Add `Retrofit` interceptor
+- [ ] Publish the package to GitHub package registry
+- [ ] Write documentation
+- [ ] Complete send SMS tests
+- [ ] Write tests
+- [ ] `@Slf4j` doesn't work while working junit tests
