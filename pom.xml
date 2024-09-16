@@ -22,6 +22,14 @@
         <fasterxml-jackson-core.version>2.16.1</fasterxml-jackson-core.version>
     </properties>
 
+    <distributionManagement>
+        <repository>
+            <id>sardorbroo-github-eskiz</id>
+            <name>GitHub Sardorbroo Apache Maven Packages</name>
+            <url>https://maven.pkg.github.com/thesardorbroo/eskiz.uz</url>
+        </repository>
+    </distributionManagement>
+
     <dependencies>
         <dependency>
             <groupId>org.junit.jupiter</groupId>

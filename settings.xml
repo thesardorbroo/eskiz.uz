@@ -1,0 +1,25 @@
+<settings xmlns="http://maven.apache.org/SETTINGS/1.0.0"
+          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:schemaLocation="http://maven.apache.org/SETTINGS/1.0.0
+                      http://maven.apache.org/xsd/settings-1.0.0.xsd">
+
+    <servers>
+        <server>
+            <id>github-sardorbroo-eskizuz</id>
+            <username>thesardorbroo</username>
+            <password>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</password>
+            <!--
+            This token for only read package, that's why it is public
+            you cannot publish package with this token.
+
+            If you want to publish something new connect to owner(thesardorbroo)
+            -->
+            <configuration>
+                <authenticationInfo>
+                    <userName>thesardorbroo</userName>
+                    <password>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</password>
+                </authenticationInfo>
+            </configuration>
+        </server>
+    </servers>
+</settings>

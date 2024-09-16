@@ -1,5 +1,10 @@
 # [Eskiz.uz](https://eskiz.uz/sms) SMS Java SDK
 
+## Developers
+| Name | Nick name  | Stack | Contact                               |
+|:-----|:-----------|:------|:--------------------------------------|
+|Sardor Shorahimov| Sardorbroo | Java backend| [Telegram](https://t.me/Sardorbro11/) |
+
 ## Should do
 
 - [x] Implement `Authorizer` builder
@@ -10,19 +15,53 @@
 - [ ] Write tests
 - [ ] `@Slf4j` doesn't work while working junit tests
 
-## Quick start
+## Documentation
+ - **Quick start**
+   - [Installation package](#installation-package)
+   - [First SMS](#send-first-sms)
+ - **Main API**
+   - Add APIs 
+ - **Examples**
+   - Add examples 
+ - **Publish package**
+   - Add instruction about how to publish new package
 
 ### Installation package
 
 Follow these steps for installing package:
 
-1. **Add repository tag to your `pom.xml`:**
+1. **Override `settings.xml`, add credentials for reading package**
+   ```xml
+       <servers>
+        <server>
+            <id>github-sardorbroo-eskizuz</id>
+            <username>thesardorbroo</username>
+            <password>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</password>
+            <configuration>
+                <authenticationInfo>
+                    <userName>thesardorbroo</userName>
+                    <password>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</password>
+                </authenticationInfo>
+            </configuration>
+        </server>
+    </servers>
+   ```
+   > [!NOTE]
+   > 
+   > Token for only read package, you cannot publish something new with this token. 
+   > If you want to add something add connect to owner([thesardorbroo](https://t.me/Sardorbro11))
+   
+   > [!IMPORTANT]
+   > If you don't want to edit global `settings.xml`, use our already configured `settings.xml`. 
+   > You just need copy/paste and change your **Intellij Idea** maven user settings. See [guide](https://link-to-guide-which-is-teaches-how-to-change-maven-settings.xml)
+ 
+2. **Add repository tag to your `pom.xml`:**
    ```xml
    <repositories>
         <!-- Other repositories -->
         <repository>
-           <id>override repository id</id>
-           <url>override url of package</url>
+           <id>sardorbroo-github-eskizuz</id>
+           <url>https://maven.pkg.github.com/thesardorbroo/eskiz.uz</url>
         </repository>
    </repositories>
    ```
@@ -40,11 +79,9 @@ Follow these steps for installing package:
    ```
 
 3. **Verify package**
-   ```
-   Install the packge by following command:
-   
-   mvn clean install
-   ```
+   Install the package by following command:
+
+   `mvn clean install`
 
 ### Send first SMS
 
@@ -81,3 +118,7 @@ public static void main(String[] args) {
    System.out.println(responseOptional);
 }
 ```
+
+
+
+### Publish package
